@@ -18,8 +18,8 @@ default: &default
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: <%= ENV.fetch("LISTOPIA_DATABASE_USERNAME") { "postgres" } %>
-  password: <%= ENV.fetch("LISTOPIA_DATABASE_PASSWORD") { "postgres" } %>
+  username: <%= ENV.fetch("LISTOPIA_DATABASE_USERNAME") { "listopia" } %>
+  password: <%= ENV.fetch("LISTOPIA_DATABASE_PASSWORD") { "listopia" } %>
   host: <%= ENV.fetch("LISTOPIA_DATABASE_HOST") { "localhost" } %>
   port: <%= ENV.fetch("LISTOPIA_DATABASE_PORT") { 5432 } %>
   # The schema search path is set to public by default.
