@@ -64,6 +64,8 @@ Rails.application.routes.draw do
 
   # Dashboard routes
   get "dashboard", to: "dashboard#index"
+  get "dashboard/kanban", to: "dashboard#kanban", as: :dashboard_kanban
+  get "dashboard/items_kanban", to: "dashboard#items_kanban", as: :dashboard_items_kanban
   get "dashboard/focus_list", to: "dashboard#focus_list", as: :dashboard_focus_list
   post "dashboard/execute_action", to: "dashboard#execute_action", as: :dashboard_execute_action
 
@@ -81,6 +83,7 @@ Rails.application.routes.draw do
   # Lists
   resources :lists do
     member do
+      get :kanban
       patch :toggle_status
       patch :toggle_public_access
       post :duplicate
@@ -107,6 +110,7 @@ Rails.application.routes.draw do
       member do
         patch :toggle_completion
         get :share
+        get :visit_url
       end
 
       # Collaborations on ListItems
@@ -145,6 +149,9 @@ Rails.application.routes.draw do
       get :stats
     end
   end
+
+  # Notification preferences
+  resource :notification_preferences, only: [ :show, :update ]
 
   # Public lists - prettier URLs for sharing (optional, both routes work)
   get "public/:slug", to: "lists#show_by_slug", as: :public_list
@@ -198,6 +205,7 @@ Rails.application.routes.draw do
       member do
         post :toggle_admin
         post :toggle_status
+        post :resend_invitation
       end
       collection do
         post :bulk_action
